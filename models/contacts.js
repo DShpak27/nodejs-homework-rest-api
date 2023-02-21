@@ -4,12 +4,13 @@ const path = require("path");
 
 const generateUniqueId = () => nanoid(5);
 
-const contactsFilePath = path.join(__dirname, "models", "contacts.json");
+const contactsFilePath = path.join(__dirname, "contacts.json");
 
 async function listContacts() {
     try {
         const unparsedContacts = fs.readFile(contactsFilePath, "utf8");
-        return JSON.parse(unparsedContacts);
+        // const contacts = JSON.parse(unparsedContacts);
+        return unparsedContacts;
     } catch (error) {
         return error.message;
     }
