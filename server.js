@@ -1,4 +1,3 @@
-// const app = require("./app").default;
 const { app } = require("./app");
 
 app.listen(3000, () => {
