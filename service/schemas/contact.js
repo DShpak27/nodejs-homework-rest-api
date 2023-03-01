@@ -11,14 +11,19 @@ const contactSchema = new Schema(
         email: {
             type: String,
             required: true,
+            match: /^[a-zA-Z]+([ -][a-zA-Z]+)*$/,
             unique: true,
         },
         phone: {
             type: String,
             required: true,
         },
+        favorite: {
+            type: Boolean,
+            required: true,
+        },
     },
-    { versionKey: false, timestamps: true }
+    { versionKey: false }
 );
 
 const Contact = mongoose.model("contact", contactSchema);

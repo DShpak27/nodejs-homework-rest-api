@@ -1,14 +1,6 @@
 ## GoIT Node.js Course Template Homework
 
-1. dotenv настроить и установить
-2. закачать новіе контакті
-
-    "scripts": {
-    "start": "cross-env NODE_ENV=production node ./server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
-    "lint": "eslint **/\*.js",
-    "lint:fix": "eslint --fix **/\*.js"
-    },
+1. обробка помилок як у прошлому завданні
 
 Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
 Форк створить репозиторій на вашому http://github.com

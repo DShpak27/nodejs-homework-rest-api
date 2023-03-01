@@ -3,13 +3,16 @@ const service = require("../service");
 const get = async (_req, res, next) => {
     try {
         const contacts = await service.listContacts();
-        res.json({
-            status: "success",
-            code: 200,
-            data: {
-                contacts: contacts,
-            },
-        });
+        console.log(typeof contacts);
+        res.end();
+        res.status(200).json(contacts);
+        // res.json({
+        //     status: "success",
+        //     code: 200,
+        //     data: {
+        //         contacts: contacts,
+        //     },
+        // });
     } catch (e) {
         console.error(e);
         next(e);
