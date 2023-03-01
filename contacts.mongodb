@@ -1,0 +1,2 @@
+use('test')
+db.contacts.findOne({_id: "63fdfcec3cb5da21bf012c20"})
