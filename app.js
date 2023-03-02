@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
-const routerApi = require("./api");
+const routerApi = require("./routes/api/contacts-routes-api");
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -13,22 +13,15 @@ app.use(express.json());
 
 app.use("/api", routerApi);
 
-app.use((_, res, __) => {
+app.use((_req, res, _next) => {
     res.status(404).json({
-        status: "error",
-        code: 404,
         message: "Use api on routes: /api/contacts",
-        data: "Not found",
     });
 });
 
-app.use((err, _, res, __) => {
-    console.log(err.stack);
+app.use((err, _req, res, _next) => {
     res.status(500).json({
-        status: "fail",
-        code: 500,
         message: err.message,
-        data: "Internal Server Error",
     });
 });
 
