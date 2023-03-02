@@ -4,6 +4,11 @@ const express = require("express");
 const router = express.Router();
 const { makeMessage } = require("./helpers/contacts-helpers");
 
+const {
+    contactCreateSchema,
+    updateContactSchema,
+} = require("../../validators/contacts-requests-validation");
+
 const commonHandler = (fn) => async (req, res, next) => {
     try {
         await fn(req, res, next);
@@ -46,6 +51,11 @@ router.get(
 router.post(
     "/contacts",
     commonHandler(async (req, res, _next) => {
+        const { error } = contactCreateSchema.validate(req.body);
+        if (error) {
+            res.status(400).json({ message: error.message });
+            return;
+        }
         const { name, email, phone, favorite } = req.body;
         const contact = await service.addContact({
             name,
@@ -60,6 +70,11 @@ router.post(
 router.patch(
     "/contacts/:id",
     commonHandler(async (req, res, _next) => {
+        const { error } = updateContactSchema.validate(req.body);
+        if (error) {
+            res.status(400).json({ message: error.message });
+            return;
+        }
         const { id } = req.params;
         const { body } = req;
         const contact = await service.updateContact(id, body);

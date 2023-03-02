@@ -9,7 +9,9 @@ const contactCreateSchema = Joi.object({
         .pattern(/^(\+)?(38)?([0-9]{10})$/)
         .required(),
     favorite: Joi.boolean(),
-}).max(4);
+})
+    .max(4)
+    .min(3);
 
 const updateContactSchema = Joi.object({
     name: Joi.string()
@@ -20,7 +22,9 @@ const updateContactSchema = Joi.object({
         .pattern(/^(\+)?(38)?([0-9]{10})$/)
         .required(),
     favorite: Joi.boolean(),
-}).max(4);
+})
+    .max(4)
+    .min(1);
 
 module.exports = {
     contactCreateSchema,
