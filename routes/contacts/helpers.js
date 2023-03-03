@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const makeMessage = (error) => {
     const messageTable = {
         name: "Invalid data type or format of 'name' field",
@@ -15,4 +17,20 @@ const makeMessage = (error) => {
     return { message: error?.message };
 };
 
-module.exports = { makeMessage };
+const commonHandler = (fn) => async (req, res, next) => {
+    try {
+        await fn(req, res, next);
+    } catch (e) {
+        if (
+            e instanceof mongoose.Error.ValidationError ||
+            e instanceof mongoose.Error.StrictModeError ||
+            e instanceof mongoose.Error.CastError
+        ) {
+            res.status(400).json(makeMessage(e));
+        } else {
+            next(e);
+        }
+    }
+};
+
+module.exports = { commonHandler };

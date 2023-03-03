@@ -23,10 +23,6 @@ const contactSchema = new Schema(
         favorite: {
             type: Boolean,
             required: true,
-            validate: {
-                validator: (value) => typeof value === "boolean",
-                message: "'{PATH}' must be a boolean value",
-            },
             default: false,
         },
     },
